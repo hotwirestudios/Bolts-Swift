@@ -1,5 +1,12 @@
 # Change Log
 
+## [1.4.1](https://github.com/hotwirestudios/Bolts-Swift/tree/1.4.1) (2019-01-17)
+[Full Changelog](https://github.com/hotwirestudios/Bolts-Swift/compare/1.4.0...1.4.1)
+
+**Implemented enhancements:**
+
+- Added Cancellation support.
+
 ## [1.4.0](https://github.com/BoltsFramework/Bolts-Swift/tree/1.4.0) (2018-07-19)
 [Full Changelog](https://github.com/BoltsFramework/Bolts-Swift/compare/1.3.0...1.4.0)
 
