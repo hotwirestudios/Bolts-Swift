@@ -12,40 +12,172 @@
 
 import Foundation
 
+//---------------------------------------------
+// MARK: - CancellationToken(Source/Reference)
+//---------------------------------------------
+
+/// A block that can be registered in a token for custom cancellation callbacks
+public typealias CancellationBlock = () -> Void
+
+/// Creates a token that can be used to check if a cancellation was requested. Only the source can cancel it's underlying token
 open class CancellationTokenSource {
     
-    public init() {
-        
-    }
+    public init() {}
     
     open var token: CancellationToken = CancellationToken()
     
+    /// Cancellation via token
     open func cancel() {
         if !token.isCancellationRequested {
-            token.isCancellationRequested = true
+            self.token.cancel()
         }
+    }
+    
+    /// Dispose all owned resources
+    open func dispose() {
+        self.token.dispose()
     }
 }
 
+/// Can be used to indicate that a task should be cancelled. Features registration of callbacks that are called on cancellation.
 open class CancellationToken {
     
-    private var _cancellationRequested = false
+    public var registrations: [CancellationTokenRegistration]? = [CancellationTokenRegistration]()
     
+    private var _cancellationRequested = false
     public var isCancellationRequested: Bool {
         get {
-            var result = false
-            synchronizationQueue.sync {
-                result = _cancellationRequested
-            }
-            return result
-        } set {
-            synchronizationQueue.sync {
-                _cancellationRequested = newValue
+            return self.synchronizationQueue.sync { self._cancellationRequested }
+        }
+        set {
+            self.synchronizationQueue.sync {
+                if self._cancellationRequested {
+                    return
+                }
+                
+                self._cancellationRequested = newValue
             }
         }
     }
     
-    fileprivate let synchronizationQueue = DispatchQueue(label: "com.bolts.task", attributes: DispatchQueue.Attributes.concurrent)
+    private var _disposed = false
+    public var isDisposed: Bool {
+        get {
+            return self.synchronizationQueue.sync { self._disposed }
+        }
+        set {
+            self.synchronizationQueue.sync {
+                if self._disposed {
+                    return
+                }
+                
+                self._disposed = newValue
+            }
+        }
+    }
+    
+    /// Indicates that a cancellation was requested. This sets isCancellationRequested to true and calls all registered cancellation oberservs.
+    func cancel() {
+        var localRegistrations: [CancellationTokenRegistration]?
+        self.synchronizationQueue.sync {
+            if _cancellationRequested {
+                return
+            }
+            
+            _cancellationRequested = true
+            localRegistrations = self.registrations
+        }
+        localRegistrations?.forEach { $0.notifyDelegate() }
+    }
+    
+    /// Registers a callback to be called when a cancellation was requested (only once)
+    ///
+    /// - Parameter block: Custom callback to be called on cancellation
+    /// - Returns: A handle that can be used to unregister the block
+    public func registerCancellationObserverWithBlock(_ block: @escaping CancellationBlock) -> CancellationTokenRegistration {
+        return self.synchronizationQueue.sync {
+            CancellationTokenRegistration(token: self, delegate: block)
+        }
+    }
+    
+    /// Unregisters a previously registered callback
+    ///
+    /// - Parameter registration: The handle received when registering
+    func unregisterRegistration(_ registration: CancellationTokenRegistration) {
+        self.synchronizationQueue.sync {
+            self.registrations?.removeAll { $0 === registration }
+        }
+    }
+    
+    func dispose() {
+        self.synchronizationQueue.sync {
+            if self._disposed {
+                return
+            }
+            
+            if let r = self.registrations {
+                r.forEach { $0.dispose() } //HINT: Mutating! Disposing a registration removes it from the token's registrations list.
+                self.registrations = nil
+            }
+            self._disposed = true
+        }
+    }
+    
+    fileprivate let synchronizationQueue = DispatchQueue(label: "com.bolts.task+CancellationToken", attributes: DispatchQueue.Attributes.concurrent)
+}
+
+/// This handle can be used to unregister a previously registered callback.
+public class CancellationTokenRegistration {
+    
+    private weak var token: CancellationToken?
+    private var cancellationObserverBlock: CancellationBlock?
+    
+    private var _disposed = false
+    public var isDisposed: Bool {
+        get {
+            return self.synchronizationQueue.sync { self._disposed }
+        }
+        set {
+            self.synchronizationQueue.sync {
+                if self._disposed {
+                    return
+                }
+                
+                self._disposed = newValue
+            }
+        }
+    }
+    
+    init(token: CancellationToken?, delegate: @escaping CancellationBlock) {
+        self.token = token
+        self.cancellationObserverBlock = delegate
+    }
+    
+    func notifyDelegate() {
+        self.cancellationObserverBlock?()
+    }
+    
+    public func dispose() {
+        if self.synchronizationQueue.sync(execute: { () -> Bool in
+            if self._disposed {
+                return true
+            }
+            
+            self._disposed = true
+            return false
+        }) {
+            return
+        }
+        
+        if let t = self.token {
+            t.unregisterRegistration(self)
+            self.token = nil
+        }
+        self.cancellationObserverBlock = nil
+    }
+    
+    fileprivate let synchronizationQueue = DispatchQueue(label: "com.bolts.task+CancellationTokenRegistration", attributes: DispatchQueue.Attributes.concurrent)
+    
 }
 
 //--------------------------------------
