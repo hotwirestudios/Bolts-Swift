@@ -19,6 +19,9 @@
 		065895131C9A947B000FDDA6 /* TaskTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81D300781C93AF9F00E1A1ED /* TaskTests.swift */; };
 		065895141C9A947B000FDDA6 /* TaskCompletionSourceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81D300771C93AF9F00E1A1ED /* TaskCompletionSourceTests.swift */; };
 		0658951F1C9A9496000FDDA6 /* BoltsSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 065894FF1C9A93B7000FDDA6 /* BoltsSwift.framework */; };
+		5865D7122211888D008C4C4D /* CancellationTokenSourceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5865D7102211884F008C4C4D /* CancellationTokenSourceTests.swift */; };
+		5865D71322118899008C4C4D /* CancellationTokenSourceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5865D7102211884F008C4C4D /* CancellationTokenSourceTests.swift */; };
+		5865D7142211889A008C4C4D /* CancellationTokenSourceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5865D7102211884F008C4C4D /* CancellationTokenSourceTests.swift */; };
 		810AB3201C9B1AC3005B6184 /* XCTestCase+TestName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 810AB31F1C9B1AC3005B6184 /* XCTestCase+TestName.swift */; };
 		810AB3211C9B1AC3005B6184 /* XCTestCase+TestName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 810AB31F1C9B1AC3005B6184 /* XCTestCase+TestName.swift */; };
 		810AB3221C9B1AC3005B6184 /* XCTestCase+TestName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 810AB31F1C9B1AC3005B6184 /* XCTestCase+TestName.swift */; };
@@ -84,6 +87,7 @@
 		065894E71C9A933B000FDDA6 /* BoltsSwift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = BoltsSwift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		065894FF1C9A93B7000FDDA6 /* BoltsSwift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = BoltsSwift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		0658951B1C9A947B000FDDA6 /* BoltsSwiftTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BoltsSwiftTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		5865D7102211884F008C4C4D /* CancellationTokenSourceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CancellationTokenSourceTests.swift; sourceTree = "<group>"; };
 		810AB31F1C9B1AC3005B6184 /* XCTestCase+TestName.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "XCTestCase+TestName.swift"; sourceTree = "<group>"; };
 		812DB5271D3597BF00552C9F /* BoltsSwift-iOS.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "BoltsSwift-iOS.xcconfig"; sourceTree = "<group>"; };
 		812DB5281D3597BF00552C9F /* BoltsSwift-macOS.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "BoltsSwift-macOS.xcconfig"; sourceTree = "<group>"; };
@@ -276,6 +280,7 @@
 			children = (
 				81D300781C93AF9F00E1A1ED /* TaskTests.swift */,
 				81D300771C93AF9F00E1A1ED /* TaskCompletionSourceTests.swift */,
+				5865D7102211884F008C4C4D /* CancellationTokenSourceTests.swift */,
 				81D300751C93AF9F00E1A1ED /* ExecutorTests.swift */,
 				810AB31F1C9B1AC3005B6184 /* XCTestCase+TestName.swift */,
 				81D300811C93AFA600E1A1ED /* Supporting Files */,
@@ -620,6 +625,7 @@
 				065895121C9A947B000FDDA6 /* ExecutorTests.swift in Sources */,
 				065895131C9A947B000FDDA6 /* TaskTests.swift in Sources */,
 				065895141C9A947B000FDDA6 /* TaskCompletionSourceTests.swift in Sources */,
+				5865D7142211889A008C4C4D /* CancellationTokenSourceTests.swift in Sources */,
 				810AB3221C9B1AC3005B6184 /* XCTestCase+TestName.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -646,6 +652,7 @@
 				81D3007A1C93AF9F00E1A1ED /* ExecutorTests.swift in Sources */,
 				81D300801C93AF9F00E1A1ED /* TaskTests.swift in Sources */,
 				81D3007E1C93AF9F00E1A1ED /* TaskCompletionSourceTests.swift in Sources */,
+				5865D71322118899008C4C4D /* CancellationTokenSourceTests.swift in Sources */,
 				810AB3211C9B1AC3005B6184 /* XCTestCase+TestName.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -672,6 +679,7 @@
 				81D300791C93AF9F00E1A1ED /* ExecutorTests.swift in Sources */,
 				81D3007F1C93AF9F00E1A1ED /* TaskTests.swift in Sources */,
 				81D3007D1C93AF9F00E1A1ED /* TaskCompletionSourceTests.swift in Sources */,
+				5865D7122211888D008C4C4D /* CancellationTokenSourceTests.swift in Sources */,
 				810AB3201C9B1AC3005B6184 /* XCTestCase+TestName.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

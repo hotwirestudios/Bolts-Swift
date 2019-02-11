@@ -94,9 +94,12 @@ open class CancellationToken {
     ///
     /// - Parameter block: Custom callback to be called on cancellation
     /// - Returns: A handle that can be used to unregister the block
+    @discardableResult
     public func registerCancellationObserverWithBlock(_ block: @escaping CancellationBlock) -> CancellationTokenRegistration {
         return self.synchronizationQueue.sync {
-            CancellationTokenRegistration(token: self, delegate: block)
+            let registration = CancellationTokenRegistration(token: self, delegate: block)
+            self.registrations?.append(registration)
+            return registration
         }
     }
     
