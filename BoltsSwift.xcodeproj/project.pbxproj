@@ -495,6 +495,7 @@
 				TargetAttributes = {
 					065894E61C9A933B000FDDA6 = {
 						CreatedOnToolsVersion = 7.2.1;
+						LastSwiftMigration = 1110;
 					};
 					065894F31C9A93B7000FDDA6 = {
 						LastSwiftMigration = 1110;
@@ -504,9 +505,11 @@
 					};
 					81CC14EB1A9BE0A100B28F86 = {
 						CreatedOnToolsVersion = 6.3;
+						LastSwiftMigration = 1110;
 					};
 					81CC14F51A9BE0A100B28F86 = {
 						CreatedOnToolsVersion = 6.3;
+						LastSwiftMigration = 1110;
 					};
 					87FEF3651A9085FA00C60678 = {
 						CreatedOnToolsVersion = 6.3;
@@ -716,6 +719,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 812DB52A1D3597BF00552C9F /* BoltsSwift-watchOS.xcconfig */;
 			buildSettings = {
+				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
 		};
@@ -723,6 +727,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 812DB52A1D3597BF00552C9F /* BoltsSwift-watchOS.xcconfig */;
 			buildSettings = {
+				SWIFT_VERSION = 5.0;
 			};
 			name = Release;
 		};
@@ -762,6 +767,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 812DB5281D3597BF00552C9F /* BoltsSwift-macOS.xcconfig */;
 			buildSettings = {
+				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
 		};
@@ -769,6 +775,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 812DB5281D3597BF00552C9F /* BoltsSwift-macOS.xcconfig */;
 			buildSettings = {
+				SWIFT_VERSION = 5.0;
 			};
 			name = Release;
 		};
@@ -776,6 +783,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 812DB52C1D3597BF00552C9F /* BoltsSwiftTests-macOS.xcconfig */;
 			buildSettings = {
+				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
 		};
@@ -783,6 +791,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 812DB52C1D3597BF00552C9F /* BoltsSwiftTests-macOS.xcconfig */;
 			buildSettings = {
+				SWIFT_VERSION = 5.0;
 			};
 			name = Release;
 		};
