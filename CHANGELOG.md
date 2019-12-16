@@ -1,5 +1,13 @@
 # Change Log
 
+## [1.5.0](https://github.com/hotwirestudios/Bolts-Swift/tree/1.5.0) (2019-12-16)
+[Full Changelog](https://github.com/hotwirestudios/Bolts-Swift/compare/1.4.1...1.5.0)
+
+**Implemented enhancements:**
+
+- Swift 5 migration.
+- Fixed build warnings.
+
 ## [1.4.1](https://github.com/hotwirestudios/Bolts-Swift/tree/1.4.1) (2019-01-17)
 [Full Changelog](https://github.com/hotwirestudios/Bolts-Swift/compare/1.4.0...1.4.1)
 

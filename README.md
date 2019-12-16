@@ -34,19 +34,19 @@ In addition to being able to have different states `completed`/`faulted`/`cancel
  pod 'Bolts-Swift'
  ```
  Run `pod install`, and you should now have the latest parse release.
-  
+
 - **[Carthage](https://github.com/carthage/carthage)**
 
  Add the following line to your Cartfile:
  ```
- github "BoltsFramework/Bolts-Swift"
+ github "hotwirestudios/Bolts-Swift"
  ```
  Run `carthage update`, and you should now have the latest version of Bolts in your Carthage folder.
 
 - **Using Bolts as a sub-project**
 
   You can also include parse as a subproject inside of your application if you'd prefer, although we do not recommend this, as it will increase your indexing time significantly. To do so, just drag and drop the `BoltsSwift.xcodeproj` file into your workspace.
-  
+
 - **Import Bolts**
 
   Now that you have the framework linked to your application - add the folowing line in every `.swift` that you want to use Bolts from:
@@ -58,7 +58,7 @@ In addition to being able to have different states `completed`/`faulted`/`cancel
 
 Every `Task` has a function named `continueWith()`, which takes a continuation closure. A continuation will be executed when the task is complete. You can the inspect the task to check if it was successful and to get its result.
 ```swift
-save(object).continueWith { task in 
+save(object).continueWith { task in
   if task.cancelled {
     // Save was cancelled
   } else if task.faulted {
@@ -72,7 +72,7 @@ save(object).continueWith { task in
 
 In many cases, you only want to do more work if the previous task was successful, and propagate any error or cancellation to be dealt with later. To do this, use `continueOnSuccessWith` function:
 ```swift
-save(object).continueOnSuccessWith { task in 
+save(object).continueOnSuccessWith { task in
   // The object was saved succesfully
   let result = task.result
 }
@@ -81,9 +81,9 @@ save(object).continueOnSuccessWith { task in
 If you return any object from `continueWith` function - this will become a result of the new function. And if you want to call into more tasks and return those results - you can use `continueWithTask`. This gives you an ability to chain more asynchronous work together.
 In the following example we want to fetch a user profile, then fetch a profile image, and if any of these operations failed - we still want to display an placeholder image:
 ```swift
-fetchProfile(user).continueOnSuccessWithTask { task in 
+fetchProfile(user).continueOnSuccessWithTask { task in
   return fetchProfileImage(task.result);
-}.continueWith { task in 
+}.continueWith { task in
   if let image = task.result {
     return image
   }
@@ -133,7 +133,7 @@ Both `continueWith()` and `continueWithTask()` functions accept an optional exec
 The default executor will dispatch to global dispatch queue, but you can provide your own executor to schedule work in a specific way.
 For example, if you want to continue with work on the main thread:
 ```swift
-fetch(object).continueWith(Executor.mainThread) { task in 
+fetch(object).continueWith(Executor.mainThread) { task in
   // This closure will be executor on the main application's thread
 }
 ```
@@ -156,9 +156,9 @@ We want to make contributing to this project as easy and transparent as possible
 
  [podspec-svg]: https://img.shields.io/cocoapods/v/Bolts-Swift.svg
  [podspec-link]: https://cocoapods.org/pods/Bolts-Swift
- 
+
  [carthage-svg]: https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat
  [carthage-link]: https://github.com/carthage/carthage
 
  [platforms-svg]: http://img.shields.io/cocoapods/p/Bolts-Swift.svg?style=flat
- [swift-version-svg]: https://img.shields.io/badge/Swift-4.0.x-orange.svg
+ [swift-version-svg]: https://img.shields.io/badge/Swift-5.0.x-orange.svg
