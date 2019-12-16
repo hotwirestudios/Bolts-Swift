@@ -189,7 +189,7 @@ public class CancellationTokenRegistration {
 public extension Task {
     
     @discardableResult
-    public func continueWith<S>(_ executor: Executor = .default, cancellationToken: CancellationToken, continuation: @escaping ((Task<TResult>) throws -> S)) -> Task<S> {
+    func continueWith<S>(_ executor: Executor = .default, cancellationToken: CancellationToken, continuation: @escaping ((Task<TResult>) throws -> S)) -> Task<S> {
         
         return self.continueWithTask(executor, cancellationToken: cancellationToken, continuation: { (task) -> Task<S> in
             let state = TaskState.fromClosure({
@@ -200,12 +200,12 @@ public extension Task {
     }
     
     @discardableResult
-    public func continueWithTask<S>(_ executor: Executor = .default, cancellationToken: CancellationToken, continuation: @escaping ((Task<TResult>) throws -> Task<S>)) -> Task<S> {
+    func continueWithTask<S>(_ executor: Executor = .default, cancellationToken: CancellationToken, continuation: @escaping ((Task<TResult>) throws -> Task<S>)) -> Task<S> {
         return continueWithTask(executor, cancellationToken: cancellationToken, options: .RunAlways, continuation: continuation)
     }
     
     @discardableResult
-    public func continueOnSuccessWith<S>(_ executor: Executor = .default, cancellationToken: CancellationToken, continuation: @escaping ((TResult) throws -> S)) -> Task<S> {
+    func continueOnSuccessWith<S>(_ executor: Executor = .default, cancellationToken: CancellationToken, continuation: @escaping ((TResult) throws -> S)) -> Task<S> {
         return continueOnSuccessWithTask(executor, cancellationToken: cancellationToken, continuation: { (taskResult) -> Task<S> in
             let state = TaskState.fromClosure({
                 try continuation(taskResult)
@@ -215,7 +215,7 @@ public extension Task {
     }
     
     @discardableResult
-    public func continueOnSuccessWithTask<S>(_ executor: Executor = .default, cancellationToken: CancellationToken, continuation: @escaping ((TResult) throws -> Task<S>)) -> Task<S> {
+    func continueOnSuccessWithTask<S>(_ executor: Executor = .default, cancellationToken: CancellationToken, continuation: @escaping ((TResult) throws -> Task<S>)) -> Task<S> {
         return continueWithTask(executor, cancellationToken: cancellationToken, options: .RunOnSuccess) { task in
             return try continuation(task.result!)
         }
